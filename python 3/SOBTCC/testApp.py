@@ -1,4 +1,4 @@
-#python3
+#!/usr/bim/python3
 #matplotlib
 import matplotlib
 matplotlib.use("TkAgg")
@@ -14,6 +14,9 @@ from tkinter import ttk
 LARGE_FONT = ("Vedrana", 12)
 style.use("ggplot")
 
+f = Figure(figsize=(5,5), dpi=100) #matplotlib
+a = f.add_subplot(111)
+
 def animate(i):
 	pullData = open("sampleData.txt","r").read()
 	dataList = pullData.split (\n)
@@ -21,7 +24,12 @@ def animate(i):
 	yList = []
 	for eachLine in dataList:
 		if len(eachLine) > 1:
-			x, y = eachLine.split()
+			x, y = eachLine.split(',')
+			xList.append(int(x))
+			yList.append(int(y))
+
+	a.clear()
+	a.plot(xList, yList)
 	
 
 class SeaofBTCapp(tk.Tk): #class that is subclass of tkinter
@@ -104,9 +112,7 @@ class PageThree(tk.Frame):
 							command = lambda: controller.show_frame(StartPage))
 		button1.pack()
 
-		f = Figure(figsize=(5,5), dpi=100) #matplotlib
-		a = f.add_subplot(111)
-		a.plot([1,2,3,4,5,6,7,8],[5,6,1,3,8,9,3,5])
+		
 
 		canvas = FigureCanvasTkAgg(f, self)
 		canvas.draw()
@@ -118,4 +124,5 @@ class PageThree(tk.Frame):
 
 
 app = SeaofBTCapp()
+ani = animaton.FuncAnimation(f, animate, interval = 1000)
 app.mainloop()
