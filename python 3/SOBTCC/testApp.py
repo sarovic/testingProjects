@@ -18,8 +18,8 @@ f = Figure(figsize=(5,5), dpi=100) #matplotlib
 a = f.add_subplot(111)
 
 def animate(i):
-	pullData = open("sampleData.txt","r").read()
-	dataList = pullData.split (\n)
+	pullData = open("sampleData","r").read()
+	dataList = pullData.split ("\n")
 	xList = []
 	yList = []
 	for eachLine in dataList:
@@ -124,5 +124,5 @@ class PageThree(tk.Frame):
 
 
 app = SeaofBTCapp()
-ani = animaton.FuncAnimation(f, animate, interval = 1000)
+ani = animation.FuncAnimation(f, animate, interval = 1000)
 app.mainloop()
